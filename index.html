@@ -204,6 +204,129 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yiyixia.github.io/2020/06/15/%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiming Xia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yiming Xia's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/15/%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-15 18:53:08" itemprop="dateCreated datePublished" datetime="2020-06-15T18:53:08+08:00">2020-06-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-27 11:02:36" itemprop="dateModified" datetime="2020-06-27T11:02:36+08:00">2020-06-27</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h1><h2 id="1-路由器与手机热点或手机USB共享网络的区别"><a href="#1-路由器与手机热点或手机USB共享网络的区别" class="headerlink" title="1.路由器与手机热点或手机USB共享网络的区别"></a>1.路由器与手机热点或手机USB共享网络的区别</h2><p><strong>问题描述：<br>连接TeamViewer时，当电脑用家里的路由器连接wifi时，无法连上远程电脑。<br>此时如果手机打开热点，或者手机连上家里的wifi然后将手机连上电脑调成USB共享网络。就能连上远端电脑。<br>在使用git clone时也出现了类似的状况，用git clone无法下载，出现了错误“port：443“。即使将 .gitconfig 中proxy的IP地址改成代理端口，还是需要手机开热点的情况才能下载。但是，手机用USB共享网络就不行了。<br>手机USB与手机热点的区别究竟是什么？</strong></p>
+<p>手机端口的问题吗</p>
+<h2 id="2-类的指针作为参数传递进函数，无法访问到类中的数据"><a href="#2-类的指针作为参数传递进函数，无法访问到类中的数据" class="headerlink" title="2.类的指针作为参数传递进函数，无法访问到类中的数据"></a>2.类的指针作为参数传递进函数，无法访问到类中的数据</h2><h2 id="3-Python中类作为函数的参数，作为类元素的测试"><a href="#3-Python中类作为函数的参数，作为类元素的测试" class="headerlink" title="3.Python中类作为函数的参数，作为类元素的测试"></a>3.Python中类作为函数的参数，作为类元素的测试</h2><p><strong>问题描述：<br>Python中的函数能不能用类做参数，类中能不能用其他类做类成员。</strong><br>做这样一个测试：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,a)</span>:</span></span><br><span class="line">        self.x=a   </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.x=self.x+<span class="number">1</span></span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,a)</span>:</span></span><br><span class="line">        self.at=a       </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.at.x+=<span class="number">2</span></span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">prints</span><span class="params">(a)</span>:</span></span><br><span class="line">    print(a.x)     </span><br><span class="line"></span><br><span class="line">a=A(<span class="number">2</span>)</span><br><span class="line">prints(a)</span><br><span class="line">b=B(a)</span><br><span class="line"></span><br><span class="line">b.add()</span><br><span class="line">prints(a)</span><br><span class="line">prints(b.at)</span><br><span class="line"></span><br><span class="line">a.add()</span><br><span class="line">prints(a)</span><br><span class="line">prints(b.at)</span><br></pre></td></tr></table></figure>
+<p>输出的结果为：</p>
+<p><img src="/2020/06/15/%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/test.PNG" alt></p>
+<p>从测试结果可以知道，类作为参数传递时，相当于是引用。作为类成员时，也是引用。因此面向对象编程会很方便。</p>
+<h2 id="4-Gibbs-现象"><a href="#4-Gibbs-现象" class="headerlink" title="4.Gibbs 现象"></a>4.Gibbs 现象</h2><p><strong>问题描述：<br>做傅里叶变换时，非连续的函数最终得到的是理论上是连续的傅里叶函数，但是计算机一离散就会出问题，会有小波纹。</strong><br>查资料，写code</p>
+<h2 id="5-隐式与显式的区别，条件数与收敛速度"><a href="#5-隐式与显式的区别，条件数与收敛速度" class="headerlink" title="5.隐式与显式的区别，条件数与收敛速度"></a>5.隐式与显式的区别，条件数与收敛速度</h2><p><strong>问题描述：<br>一直没有真正理解显式与隐式的区别，需要好好整理理解下</strong><br>做一个demo学习，一维信号传递，二维图像，旋转加平移。</p>
+<h2 id="6-珠链喷泉（Chain-fountain）模拟"><a href="#6-珠链喷泉（Chain-fountain）模拟" class="headerlink" title="6.珠链喷泉（Chain fountain）模拟"></a>6.珠链喷泉（Chain fountain）模拟</h2><p><strong>问题描述：<br>看能不能用简单的Mass-Spring模拟出来</strong></p>
+<p>模拟方案如下：</p>
+<p>数据结构：</p>
+<p>将弹簧质点存在链表里，使用链表的原因是为了方便对整条链进行操作。</p>
+<ul>
+<li>算法 </li>
+</ul>
+<p>S1. 遍历弹簧质点，计算每个质点受到其他质点作用的力$ f^{spring}_i $，同时给每个质点添加重力$ f^{gravity}_i $。</p>
+<p>S2. 对所有质点，计算其距离杯壁的距离$d$，当距离小于厚度$t$时，对质点施加一个指向法向的弹性力。</p>
+<p>S3. 更新质点的坐标。进行碰撞处理。对于一直落在地面的粒子，进行重复利用的操作。</p>
+<ul>
+<li>具体说明：</li>
+</ul>
+<p>S1：没有什么具体要注意的。</p>
+<p>S2：这一步涉及到质点与多边形的交互问题。处理的方法是，根据多边形的距离场，定义一个排斥项$F=k(d-t)$。这一排斥力项，一方面可以满足能量守恒、动量守恒。另一方面，可以避免很多复杂的处理。</p>
+<p>之前一段时间，我在尝试做PolyBridge桥面要考虑桥面与小球的交互时，想通过多边形引入冲量，然后计算各种速度等，但是从实践的结果来看，这种处理方法很不好，小球根本无法稳定的停在桥面上。</p>
+<p>从结果来看，这样简单的处理可以获得很好的结果。所以，以后遇到物体与多边形交互的情形，可以用类似的方法处理。</p>
+<p>顺便一提的是，过程中也遇到一个问题，如果链的劲度系数不够的话，会出现链条从多边形边缘穿过的现象。这也符合物理实际，真实的链劲度系数应该非常地大。</p>
+<p>这种处理方式应该叫penalty-based system[1]，这种处理方式的问题在于力太强不稳定，力太弱会出现penetrate的现象。</p>
+<p>还有一种方式是projection collision reactions[1]，把粒子从碰撞体中拔出来。</p>
+<p>S3：这一步有一个注意点，Verlet Integration，在分子动力学模拟中非常常用，Verlet Integration可以通过设置粒子位置来完成碰撞，而带有速度项的更新会引入一些碰撞处理的麻烦，但是，这样一来，物理的真实性就不一定可行了。这里记录它的基本思想。</p>
+<script type="math/tex; mode=display">x(t+\Delta t)=x(t)+\frac {dx}{dt}\Delta t+\frac {1}{2}\frac {d^2x}{dt^2}{\Delta t}^2+\frac {1}{6}\frac {d^3x}{dt^3}{\Delta t}^3+O({\Delta t}^4)</script><script type="math/tex; mode=display">x(t-\Delta t)=x(t)-\frac {dx}{dt}\Delta t+\frac {1}{2}\frac {d^2x}{dt^2}{\Delta t}^2-\frac {1}{6}\frac {d^3x}{dt^3}{\Delta t}^3+O({\Delta t}^4)</script><script type="math/tex; mode=display">x(t+\Delta t)+x(t-\Delta t)=2x(t)+\frac {d^2x}{dt^2}{\Delta t}^2+O({\Delta t}^4)</script><p>从式子中可以看到，Verlet积分是local四阶精度，global二阶精度。</p>
+<p>除此以外，还有velocity 的Verlet积分，它的形式是：</p>
+<script type="math/tex; mode=display">v(t+\frac {1}{2}\Delta t)=v(t)+\frac {1}{2}a(t)\Delta t</script><script type="math/tex; mode=display">x(t+\Delta t)=x(t)+v(t+\frac {1}{2}\Delta t)\Delta t</script><script type="math/tex; mode=display">v(t+\Delta t)=v(t+\frac {1}{2}\Delta t)+\frac {1}{2}a(t+\Delta t)\Delta t</script><p>这种更新形式与Leapfrog方法相似。值得注意的是，时间精度提高一倍，但是加速度的计算开销没有发生变化。</p>
+<p>这种方法有两个优点：</p>
+<p>一个是time-reversibility，时间回溯性，即向前n步，掉头更新n步可以回头。这一点从</p>
+<p>另一个是symplectic nature，辛结构？对于满足辛变换的系统会使用辛算法进行离散求解，辛积分。</p>
+<p>这里埋个坑，为什么Euler method是一阶精度，Backward Eular精度是多少，留到问题5中进行解决。</p>
+<p>为了让模拟的时间变长，当质点撞到地面的时候，将落在地面上的粒子移到杯子中。连在尾部。这里就体现了链表的优势，操作非常简单。后来想了下，如果用数组做索引也可以。</p>
+<p>最终的模拟结果如图：</p>
+<p>可以看到，出现了珠链喷泉的现象。从一定程度上反应了，这个现象来源于杯底的作用力。</p>
+<p>[1] <a href="https://en.wikipedia.org/wiki/Verlet_integration" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Verlet_integration</a></p>
+<p>[2] <a href="https://en.wikipedia.org/wiki/Leapfrog_integration" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Leapfrog_integration</a></p>
+<h2 id="7-Hexo图片、公式插入的问题"><a href="#7-Hexo图片、公式插入的问题" class="headerlink" title="7.Hexo图片、公式插入的问题"></a>7.Hexo图片、公式插入的问题</h2><p><strong>问题描述：如何在Hexo中插入图片、公式</strong></p>
+<p>不得不说，折腾了好一会才折腾好。</p>
+<ul>
+<li>插入图片</li>
+</ul>
+<p>图片插入是需要安装一个插件叫hexo-asset-image。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure>
+<p>安装以后，一开始还是无法插入图片。观察以后发现有几个问题。一个是输出信息的时候，“Update linke—&gt;”后面的地址有各种%2E之类的URL编码。这种情况应该是因为文章的名字中有中文（但是Hexo不是支持中文的吗…）。地址中图片名这一块有一个%5C，这个是反斜杠的编码。</p>
+<p>之后找了很多教程基本雷同，没能解决问题，但是有一个教程很有意思。他遇到了教程里没有提到的问题，他最终是看hexo-asset-image中index.js的代码解决的。所以模仿了教程的阅读思路，看了下代码，发现应该是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var src &#x3D; $(this).attr(&#39;src&#39;).replace(&#39;\\&#39;, &#39;&#x2F;&#39;);</span><br></pre></td></tr></table></figure>
+<p>这边有点问题，这个替换没替换成功。所以，看了下md中的图片地址，都是反斜杠连接的，问题应该在这，所以改成了斜杠。问题就没了。</p>
+<p>斜杠与反斜杠：反斜杠是win的文件路径。斜杠是unix的文件路径。网络文件的地址都是统一的斜杠。C里反斜杠还有转义的含义。</p>
+<p>后来在解决公式问题的时候似乎改了一些东西。之前的问题好像自动消失了。但是可以确定的是之前是斜杠与反斜杠转换这块有问题。</p>
+<ul>
+<li>插入公式</li>
+</ul>
+<p>直接参考<a href="https://runninggump.github.io/2018/12/05/%E6%88%90%E5%8A%9F%E8%A7%A3%E5%86%B3%E5%9C%A8hexo%E4%B8%AD%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E7%9A%84%E9%97%AE%E9%A2%98/" target="_blank" rel="noopener">教程</a>即可，很清楚。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yiyixia.github.io/2020/06/15/LBM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -245,121 +368,6 @@
       
           <h1 id="格子玻尔兹曼方法-LBM-学习记录"><a href="#格子玻尔兹曼方法-LBM-学习记录" class="headerlink" title="格子玻尔兹曼方法(LBM)学习记录"></a>格子玻尔兹曼方法(LBM)学习记录</h1><h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>前几天看到一个用LBM模拟卡门涡街（Karman Vortex Street）的demo，被深深地吸引。因为LBM也是目前工业领域模拟比如：多孔介质等比较常用的模拟方法，同时，LBM的理论背景和MPC有一定的渊源，所以决定找些资料学习下LBM背后的原理。</p>
 <h2 id="二、理论模型"><a href="#二、理论模型" class="headerlink" title="二、理论模型"></a>二、理论模型</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yiyixia.github.io/2020/06/15/%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yiming Xia">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yiming Xia's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/15/%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-15 18:53:08" itemprop="dateCreated datePublished" datetime="2020-06-15T18:53:08+08:00">2020-06-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-27 08:05:30" itemprop="dateModified" datetime="2020-06-27T08:05:30+08:00">2020-06-27</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h1><h2 id="1-路由器与手机热点或手机USB共享网络的区别"><a href="#1-路由器与手机热点或手机USB共享网络的区别" class="headerlink" title="1.路由器与手机热点或手机USB共享网络的区别"></a>1.路由器与手机热点或手机USB共享网络的区别</h2><p><strong>问题描述：<br>连接TeamViewer时，当电脑用家里的路由器连接wifi时，无法连上远程电脑。<br>此时如果手机打开热点，或者手机连上家里的wifi然后将手机连上电脑调成USB共享网络。就能连上远端电脑。<br>在使用git clone时也出现了类似的状况，用git clone无法下载，出现了错误“port：443“。即使将 .gitconfig 中proxy的IP地址改成代理端口，还是需要手机开热点的情况才能下载。但是，手机用USB共享网络就不行了。<br>手机USB与手机热点的区别究竟是什么？</strong></p>
-<p>手机端口的问题吗</p>
-<h2 id="2-类的指针作为参数传递进函数，无法访问到类中的数据"><a href="#2-类的指针作为参数传递进函数，无法访问到类中的数据" class="headerlink" title="2.类的指针作为参数传递进函数，无法访问到类中的数据"></a>2.类的指针作为参数传递进函数，无法访问到类中的数据</h2><h2 id="3-Python中类作为函数的参数，作为类元素的测试"><a href="#3-Python中类作为函数的参数，作为类元素的测试" class="headerlink" title="3.Python中类作为函数的参数，作为类元素的测试"></a>3.Python中类作为函数的参数，作为类元素的测试</h2><p><strong>问题描述：<br>Python中的函数能不能用类做参数，类中能不能用其他类做类成员。</strong><br>做这样一个测试：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,a)</span>:</span></span><br><span class="line">        self.x=a   </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.x=self.x+<span class="number">1</span></span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,a)</span>:</span></span><br><span class="line">        self.at=a       </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.at.x+=<span class="number">2</span></span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">prints</span><span class="params">(a)</span>:</span></span><br><span class="line">    print(a.x)     </span><br><span class="line"></span><br><span class="line">a=A(<span class="number">2</span>)</span><br><span class="line">prints(a)</span><br><span class="line">b=B(a)</span><br><span class="line"></span><br><span class="line">b.add()</span><br><span class="line">prints(a)</span><br><span class="line">prints(b.at)</span><br><span class="line"></span><br><span class="line">a.add()</span><br><span class="line">prints(a)</span><br><span class="line">prints(b.at)</span><br></pre></td></tr></table></figure>
-
-<p>输出的结果为：</p>
-<p><img src="/2020/06/15/%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/test.PNG" alt></p>
-<p>从测试结果可以知道，类作为参数传递时，相当于是引用。作为类成员时，也是引用。因此面向对象编程会很方便。</p>
-<h2 id="4-Gibbs-现象"><a href="#4-Gibbs-现象" class="headerlink" title="4.Gibbs 现象"></a>4.Gibbs 现象</h2><p><strong>问题描述：<br>做傅里叶变换时，非连续的函数最终得到的是理论上是连续的傅里叶函数，但是计算机一离散就会出问题，会有小波纹。</strong><br>查资料，写code</p>
-<h2 id="5-隐式与显式的区别，条件数与收敛速度"><a href="#5-隐式与显式的区别，条件数与收敛速度" class="headerlink" title="5.隐式与显式的区别，条件数与收敛速度"></a>5.隐式与显式的区别，条件数与收敛速度</h2><p><strong>问题描述：<br>一直没有真正理解显式与隐式的区别，需要好好整理理解下</strong><br>做一个demo学习，一维信号传递，二维图像，旋转加平移。</p>
-<h2 id="6-珠链喷泉（Chain-fountain）模拟"><a href="#6-珠链喷泉（Chain-fountain）模拟" class="headerlink" title="6.珠链喷泉（Chain fountain）模拟"></a>6.珠链喷泉（Chain fountain）模拟</h2><p><strong>问题描述：<br>看能不能用简单的Mass-Spring模拟出来</strong></p>
-<p>模拟方案如下：</p>
-<p>数据结构：</p>
-<p>将弹簧质点存在链表里，使用链表的原因是为了方便对整条链进行操作。</p>
-<ul>
-<li>算法 </li>
-</ul>
-<p>S1. 遍历弹簧质点，计算每个质点受到其他质点作用的力$ f^{spring}_i $，同时给每个质点添加重力$ f^{gravity}_i $。</p>
-<p>S2. 对所有质点，计算其距离杯壁的距离$d$，当距离小于厚度$t$时，对质点施加一个指向法向的弹性力。</p>
-<p>S3. 更新质点的坐标。进行碰撞处理。对于一直落在地面的粒子，进行重复利用的操作。</p>
-<ul>
-<li>具体说明：</li>
-</ul>
-<p>S1：没有什么具体要注意的。</p>
-<p>S2：这一步涉及到质点与多边形的交互问题。处理的方法是，根据多边形的距离场，定义一个排斥项$F=k(d-t)$。这一排斥力项，一方面可以满足能量守恒、动量守恒。另一方面，可以避免很多复杂的处理。</p>
-<p>之前一段时间，我在尝试做PolyBridge桥面要考虑桥面与小球的交互时，想通过多边形引入冲量，然后计算各种速度等，但是从实践的结果来看，这种处理方法很不好，小球根本无法稳定的停在桥面上。</p>
-<p>从结果来看，这样简单的处理可以获得很好的结果。所以，以后遇到物体与多边形交互的情形，可以用类似的方法处理。</p>
-<p>顺便一提的是，过程中也遇到一个问题，如果链的劲度系数不够的话，会出现链条从多边形边缘穿过的现象。这也符合物理实际，真实的链劲度系数应该非常地大。</p>
-<p>这种处理方式应该叫penalty-based system[1]，这种处理方式的问题在于力太强不稳定，力太弱会出现penetrate的现象。</p>
-<p>还有一种方式是projection collision reactions[1]，把粒子从碰撞体中拔出来。</p>
-<p>S3：这一步有一个注意点，Verlet Integration，在分子动力学模拟中非常常用，Verlet Integration可以通过设置粒子位置来完成碰撞，而带有速度项的更新会引入一些碰撞处理的麻烦，但是，这样一来，物理的真实性就不一定可行了。这里记录它的基本思想。</p>
-<p>$$x(t+\Delta t)=x(t)+\frac {dx}{dt}\Delta t+\frac {1}{2}\frac {d^2x}{dt^2}{\Delta t}^2+\frac {1}{6}\frac {d^3x}{dt^3}{\Delta t}^3+O({\Delta t}^4)$$</p>
-<p>$$x(t-\Delta t)=x(t)-\frac {dx}{dt}\Delta t+\frac {1}{2}\frac {d^2x}{dt^2}{\Delta t}^2-\frac {1}{6}\frac {d^3x}{dt^3}{\Delta t}^3+O({\Delta t}^4)$$</p>
-<p>$$x(t+\Delta t)+x(t-\Delta t)=2x(t)+\frac {d^2x}{dt^2}{\Delta t}^2+O({\Delta t}^4)$$</p>
-<p>从式子中可以看到，Verlet积分是local四阶精度，global二阶精度。</p>
-<p>除此以外，还有velocity 的Verlet积分，它的形式是：</p>
-<p>$$v(t+\frac {1}{2}\Delta t)=v(t)+\frac {1}{2}a(t)\Delta t$$</p>
-<p>$$x(t+\Delta t)=x(t)+v(t+\frac {1}{2}\Delta t)\Delta t$$</p>
-<p>$$v(t+\Delta t)=v(t+\frac {1}{2}\Delta t)+\frac {1}{2}a(t+\Delta t)\Delta t$$</p>
-<p>这种更新形式与Leapfrog方法相似。值得注意的是，时间精度提高一倍，但是加速度的计算开销没有发生变化。</p>
-<p>这种方法有两个优点：</p>
-<p>一个是time-reversibility，时间回溯性，即向前n步，掉头更新n步可以回头。这一点从</p>
-<p>另一个是symplectic nature，辛结构？对于满足辛变换的系统会使用辛算法进行离散求解，辛积分。</p>
-<p>这里埋个坑，为什么Euler method是一阶精度，Backward Eular精度是多少，留到问题5中进行解决。</p>
-<p>为了让模拟的时间变长，当质点撞到地面的时候，将落在地面上的粒子移到杯子中。连在尾部。这里就体现了链表的优势，操作非常简单。后来想了下，如果用数组做索引也可以。</p>
-<p>最终的模拟结果如图：</p>
-<p>可以看到，出现了珠链喷泉的现象。从一定程度上反应了，这个现象来源于杯底的作用力。</p>
-<p>[1] <a href="https://en.wikipedia.org/wiki/Verlet_integration" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Verlet_integration</a></p>
-<p>[2] <a href="https://en.wikipedia.org/wiki/Leapfrog_integration" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Leapfrog_integration</a></p>
-<h2 id="7-Hexo图片、公式插入的问题"><a href="#7-Hexo图片、公式插入的问题" class="headerlink" title="7.Hexo图片、公式插入的问题"></a>7.Hexo图片、公式插入的问题</h2><p><strong>问题描述：遇到坑了</strong></p>
-<p>坑了坑了坑了坑了坑了的</p>
-
       
     </div>
 
@@ -525,6 +533,61 @@
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
