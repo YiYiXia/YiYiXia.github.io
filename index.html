@@ -145,6 +145,121 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yiyixia.github.io/2020/07/08/Conjugate-Gradient/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yiming Xia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yiming Xia's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/08/Conjugate-Gradient/" class="post-title-link" itemprop="url">Conjugate Gradient</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-07-08 18:55:36 / Modified: 23:37:18" itemprop="dateCreated datePublished" datetime="2020-07-08T18:55:36+08:00">2020-07-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="共轭梯度法（Conjugate-Gradient）及其相关算法"><a href="#共轭梯度法（Conjugate-Gradient）及其相关算法" class="headerlink" title="共轭梯度法（Conjugate Gradient）及其相关算法"></a>共轭梯度法（Conjugate Gradient）及其相关算法</h1><h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><p>一般来说，解$Ax=b$这种方程，我们的数值计算书[4]中讲得方法有：直接法（高斯消元，行、列主元，LU分解，LDLT分解），迭代法（Jacobi，Gauss-Seidel，松弛法）。分解法固然是最直接的方法，但是对于大型的稀疏矩阵，用分解法分解出来的矩阵，非零项很多，很吃内存。书中所讲的几种迭代法，迭代次数会比较多，而且迭代次数越多，迭代的效率越低。共轭梯度法是很好地解决了这一问题的算法。</p>
+<h2 id="2-梯度下降法"><a href="#2-梯度下降法" class="headerlink" title="2. 梯度下降法"></a>2. 梯度下降法</h2><p>首先考虑这样一个函数的极值问题，$f(\mathbf{x})=\frac{1}{2}\mathbf{x}^TA\mathbf{x}-\mathbf{x}^Tb+c$。与极值密切相关的是函数的导数，对$f(\mathbf{x})$关于$\mathbf{x}$求导，得到，$\frac{df(\mathbf{x})}{d\mathbf{x}}=\frac{1}{2}(A+A^T)\mathbf{x}-b$，当$A=A^T$时，即$A$为对称阵时，$\frac{df(\mathbf{x})}{d\mathbf{x}}=A\mathbf{x}-b$。这样，求解方程$A\mathbf{x}=b$的问题被转化为一个函数求极值的问题。而且形式上要求$A$为对称阵。也就是说共轭梯度法并不是对所有形式的矩阵A都适用，需要A满足对称正定的条件。</p>
+<p>梯度下降法的思想是，给某个解$\mathbf{x_n}$，残差$\mathbf{r_n}=b-A\mathbf{x_n}=-f’(\mathbf{x_n})$。按照牛顿法的思想，让$\mathbf{x_n}$沿着负梯度$\mathbf{r_n}$的方向移动到$\mathbf{x_{n+1}}$。这里要求$\mathbf{x_{n+1}}$是$f(\mathbf{x})$在$\mathbf{x_n}+k\mathbf{r_n}$上的最小值。因此，有$\frac{df(\mathbf{x_n}+k\mathbf{r_n})}{dk}=\mathbf{r_n}^T\mathbf{r_{n+1}}=0$。所以，$\mathbf{r_n}^T(b-A(\mathbf{x_n}+k\mathbf{r_n}))=\mathbf{r_n}^T\mathbf{r_n}-k\mathbf{r_n}^TA\mathbf{r_n}=0$，所以，$k=\frac{\mathbf{r_n}^T\mathbf{r_n}}{\mathbf{r_n}^TA\mathbf{r_n}}$。这样，算法的流程就很清楚了。</p>
+<blockquote>
+<p>$\alpha_n=\frac{\mathbf{r_n}^T\mathbf{r_n}}{\mathbf{r_n}^TA\mathbf{r_n}}$</p>
+<p>$\mathbf{x_{n+1}}=\mathbf{x_n}+\alpha_n\mathbf{r_n}$</p>
+<p>$\mathbf{r_{n+1}}=\mathbf{r_n}-\alpha_nA\mathbf{r_n}$</p>
+</blockquote>
+<p>但是，存在一个问题，即便$\mathbf{r_j}^T\mathbf{r_n}=0,j&lt;n$，$\mathbf{r_j}^T\mathbf{r_{n+1}}=\mathbf{r_j}^T\mathbf{r_n}-k\mathbf{r_j}^TA\mathbf{r_n}=0$也不一定满足，$\mathbf{r_{n+1}}$也不能保证与前面$n$个$\mathbf{r_i}$都垂直。即后面前进的方向会有部分与前面的某步重合，这使得梯度下降法的计算效率比较低。注意到，式子中有一项$\mathbf{r_j}^TA\mathbf{r_n}$干扰了正交性，所以需要在这上面进行一些调整。（这可能是共轭梯度法设计出来的早先思路）</p>
+<h2 id="3-共轭梯度法"><a href="#3-共轭梯度法" class="headerlink" title="3. 共轭梯度法"></a>3. 共轭梯度法</h2><p>基于此，定义了一个$\mathbf{d_j}$与$\mathbf{d_k}$关于$A$正交，即$\mathbf{d_j}^TA\mathbf{d_k}=0$。</p>
+<p>现在，我们尝试构建下CG的计算方法，从最简单的情形考虑起。设$\mathbf{r_0}=b-A\mathbf{x_0}$，$\mathbf{d_0}=\mathbf{r_0}$。此时，$\alpha_0=\frac{\mathbf{r_0}^T\mathbf{r_0}}{\mathbf{d_0}^TA\mathbf{d_0}}$，$\mathbf{x_1}=\mathbf{x_0}+\alpha_0\mathbf{d_0}$，$\mathbf{r_1}=\mathbf{r_0}-\alpha_0A\mathbf{d_0}$，此时，可以看出，$\mathbf{d_0}^T\mathbf{r_0}=\mathbf{r_0}^T\mathbf{r_0}$，$\mathbf{r_0}^T\mathbf{r_1}=\mathbf{r_0}^T\mathbf{r_0}-\alpha_0\mathbf{r_0}^TA\mathbf{d_0}=0$。可以知道$\mathbf{r_1}$与$\mathbf{r_0}$正交，因此由$\mathbf{r_1}$构建出一个新的更新方向就是(Schmit)，$\mathbf{d_1}=\mathbf{r_1}+\beta_0\mathbf{d_0}$，因为要满足关于$A$正交，所以，$\mathbf{d_0}^TA\mathbf{d_1}=\mathbf{d_0}^TA(\mathbf{r_1}+\beta_0\mathbf{d_0})=0$。此时，利用$A\mathbf{d_0}=\frac{\mathbf{r_0}-\mathbf{r_1}}{\alpha_0}$，得$\frac{\mathbf{r_0}^T-\mathbf{r_1}^T}{\alpha_0}\mathbf{r_1}=-\beta_0\mathbf{d_0}^TA\mathbf{d_0}$，所以，$\beta_0=\frac{\mathbf{r_1}^T\mathbf{r_1}}{\alpha_0\mathbf{d_0}^TA\mathbf{d_0}}=\frac{\mathbf{r_1}^T\mathbf{r_1}}{\mathbf{r_0}^T\mathbf{r_0}}$，$\mathbf{d_1}=\mathbf{r_1}+\frac{\mathbf{r_1}^T\mathbf{r_1}}{\mathbf{r_0}^T\mathbf{r_0}}\mathbf{d_0}$。此时，注意到，$\mathbf{r_0}^TA\mathbf{d_1}=\mathbf{d_0}^TA\mathbf{d_1}=0$，此式备用。</p>
+<p>下面来到第$n$步，根据简单情形，我们利用归纳法构建行进的方向。首先，假设，当$i,j\leqslant n \quad (n\geqslant1)$时，有这些关系成立。$\mathbf{d_i}^T\mathbf{r_i}=\mathbf{r_i}^T\mathbf{r_i}$，$\mathbf{r_i}^T\mathbf{r_j}=0\quad(i\not=j)$，$\mathbf{d_i}^TA\mathbf{d_j}=0\quad(i\not=j)$，$\mathbf{r_i}^TA\mathbf{d_j}=0\quad(i&lt;j)$，$\mathbf{d_i}=\mathbf{r_i}+\beta_{i-1}\mathbf{d_{i-1}}$。</p>
+<p>现在来到第$n+1$步，首先可以确定，$\alpha_n=\frac{\mathbf{d_n}^T\mathbf{r_n}}{\mathbf{d_n}^TA\mathbf{d_n}}=\frac{\mathbf{r_n}^T\mathbf{r_n}}{\mathbf{d_n}^TA\mathbf{d_n}}$，这样就得到，$\mathbf{r_{n+1}}=\mathbf{r_n}-\frac{\mathbf{r_n}^T\mathbf{r_n}}{\mathbf{d_n}^TA\mathbf{d_n}}A\mathbf{d_n}$。此时，证明$\mathbf{r_{n+1}}$与$\mathbf{r_i}(i\leqslant n)$的正交性。$\mathbf{r_n}^T\mathbf{r_{n+1}}=\mathbf{r_n}^T\mathbf{r_n}-\frac{\mathbf{r_n}^T\mathbf{r_n}}{\mathbf{d_n}^TA\mathbf{d_n}}\mathbf{r_n}^TA\mathbf{d_n}=\mathbf{r_n}^T\mathbf{r_n}-\frac{\mathbf{r_n}^T\mathbf{r_n}}{(\mathbf{r_n}^T+\beta_{n-1}\mathbf{d_{n-1}}^T)A\mathbf{d_n}}\mathbf{r_n}^TA\mathbf{d_n}=\mathbf{r_n}^T\mathbf{r_n}-\mathbf{r_n}^T\mathbf{r_n}=0$，而$\mathbf{r_i}^T\mathbf{r_{n+1}}=\mathbf{r_i}^T\mathbf{r_n}-\frac{\mathbf{r_n}^T\mathbf{r_n}}{\mathbf{d_n}^TA\mathbf{d_n}}\mathbf{r_i}^TA\mathbf{d_n}=0+0,(i&lt;n)$，有了$\mathbf{r_{n+1}}$，就可以构造$\mathbf{d_{n+1}}$，设$\mathbf{d_{n+1}}=\mathbf{r_{n+1}}+\beta_n\mathbf{d_n}$，则$\mathbf{d_n}^TA\mathbf{d_{n+1}}=\mathbf{d_n}^TA(\mathbf{r_{n+1}}+\beta_n\mathbf{d_n})=0$，所以利用$A\mathbf{d_n}=\frac{\mathbf{r_n}-\mathbf{r_{n+1}}}{\alpha_n}$，$\beta_n=\frac{\mathbf{d_n}^TA\mathbf{r_{n+1}}}{\mathbf{d_n}^TA\mathbf{d_n}}=\frac{\mathbf{r_{n+1}}^T\mathbf{r_{n+1}}}{\mathbf{r_n}^T\mathbf{r_n}}$，$\mathbf{d_{n+1}}=\mathbf{r_{n+1}}+\frac{\mathbf{r_{n+1}}^T\mathbf{r_{n+1}}}{\mathbf{r_n}^T\mathbf{r_n}}\mathbf{d_n}$，现在，证明$\mathbf{d_{n+1}}$关于$A$的正交性。$\mathbf{d_j}^TA\mathbf{d_{n+1}}=\mathbf{d_j}^TA\mathbf{r_{n+1}}+\frac{\mathbf{r_{n+1}}^T\mathbf{r_{n+1}}}{\mathbf{r_n}^T\mathbf{r_n}}\mathbf{d_j}^TA\mathbf{d_n}=\frac{\mathbf{r_j}^T-\mathbf{r_{j+1}}^T}{\alpha_j}\mathbf{r_{n+1}}+\beta_n\mathbf{d_j}^TA\mathbf{d_n}=0(j&lt;n)$，对于$j=n$的情形，$\mathbf{d_n}^TA\mathbf{d_{n+1}}=\frac{\mathbf{r_n}^T-\mathbf{r_{n+1}}^T}{\alpha_n}\mathbf{r_{n+1}}+\beta_n\mathbf{d_n}^TA\mathbf{d_n}=-\frac{\mathbf{r_{n+1}}^T\mathbf{r_{n+1}}}{\alpha_n}+\frac{\mathbf{r_{n+1}}^T\mathbf{r_{n+1}}}{\mathbf{r_n}^T\mathbf{r_n}}\mathbf{d_n}^TA\mathbf{d_n}=0$。然后，还有一些辅助的式子的证明，$\mathbf{d_{n+1}}^T\mathbf{r_{n+1}}=\mathbf{r_{n+1}}^T\mathbf{r_{n+1}}+\beta_n\mathbf{d_n}^T\mathbf{r_{n+1}}=\mathbf{r_{n+1}}^T\mathbf{r_{n+1}}+\beta_n\mathbf{d_n}^T(\mathbf{r_n}-\frac{\mathbf{r_n}^T\mathbf{r_n}}{\mathbf{d_n}^TA\mathbf{d_n}}A\mathbf{d_n})=\mathbf{r_{n+1}}^T\mathbf{r_{n+1}}$。$\mathbf{r_i}^TA\mathbf{d_{n+1}}=(\sum_{j}^{i-1}a_j\mathbf{d_j})A\mathbf{d_{n+1}}=0$。至此，我们证明了所有的结论在第$n+1$步后也成立。这就是CG的形式的由来，关键在于两点，一个是关于$A$正交，另一个是 $\mathbf{d_i}=\mathbf{r_i}+\beta_{i-1}\mathbf{d_{i-1}}$的形式的确立。</p>
+<blockquote>
+<p>$\alpha_n=\frac{\mathbf{r_n}^T\mathbf{r_n}}{\mathbf{d_n}^TA\mathbf{d_n}}$</p>
+<p>$\mathbf{x_{n+1}}=\mathbf{x_n}+\alpha_n\mathbf{d_n}$</p>
+<p>$\mathbf{r_{n+1}}=\mathbf{r_n}-\alpha_nA\mathbf{d_n}$</p>
+<p>$\beta_n=\frac{\mathbf{r_{n+1}}^T\mathbf{r_{n+1}}}{\mathbf{r_n}^T\mathbf{r_n}}$</p>
+<p>$\mathbf{d_{n+1}}=\mathbf{r_{n+1}}+\beta _n\mathbf{d_n}$</p>
+</blockquote>
+<h2 id="4-预条件共轭梯度法-Preconditioner-Conjugate-Gradient"><a href="#4-预条件共轭梯度法-Preconditioner-Conjugate-Gradient" class="headerlink" title="4. 预条件共轭梯度法(Preconditioner Conjugate Gradient)"></a>4. 预条件共轭梯度法(Preconditioner Conjugate Gradient)</h2><p>按照算法写了代码之后，发现迭代的速度并不是非常快。这与谱半径有关，即最大的特征值绝对值。所以，又有PCG(Preconditioner conjugate gradient)来加速收敛。</p>
+<p>PCG的思想是，$A$是对称正定矩阵，所以，可以将$A$写成$A=LL^T$的形式。但是$L$有很多非零项，所以可以设计出某些Preconditioner来近似$A$，这样使得$L^{-1}AL^{-T}\approx I$，而求解$I\mathbf{x}=\mathbf{b}$是非常容易的，所以，这样就使收敛变得更容易了。</p>
+<p>这里先推导下引入preconditioner后的CG流程形式是怎么来的。</p>
+<p>$A\mathbf{x}=b\Leftrightarrow E^{-1}AE^{-T}(E^T\mathbf{x})=E^{-1}\mathbf{b}\Leftrightarrow \hat{A}\hat{\mathbf{x}}=\hat{b}$</p>
+<p>，令$M=EE^T$，CG的流程变为：</p>
+<blockquote>
+<p>$\hat{\mathbf{r}}_n=\hat{\mathbf{b}}-\hat{A}\hat{\mathbf{x}}_n=E^{-1}\mathbf{r}_n$</p>
+<p>$\mathbf{\hat{d}_n}=E^{-1}\mathbf{d_n}$</p>
+<p>$\hat{\alpha}_n=\frac{\hat{\mathbf{r}}_n^T\hat{\mathbf{r}}_n}{\hat{\mathbf{d}}_n^T\hat{A}\hat{\mathbf{d}}_n}=\frac{\mathbf{r}_n^TE^{-T}E^T\mathbf{r}_n}{\mathbf{d}_n^TE^{-T}E^{-1}AE^{-T}E^{-1}\mathbf{d}_n}$</p>
+<p>$\hat{\mathbf{x}}_{n+1}=\hat{\mathbf{x}}_n+\hat{\alpha}_n\hat{\mathbf{d}}_n\Rightarrow \mathbf{x}_{n+1}=\mathbf{x}_n+\hat{\alpha}_nE^{-T}E^{-1}\mathbf{d}_n$</p>
+<p>$\hat{\beta}_n=\frac{\hat{\mathbf{r}}_{n+1}^T\hat{\mathbf{r}}_{n+1}}{\hat{\mathbf{r}}_n^T\hat{\mathbf{r}}_n}=\frac{\mathbf{r}_{n+1}^TE^{-T}E^{-1}\mathbf{r}_{n+1}}{\mathbf{r}_n^TE^{-T}E^{-1}\mathbf{r}_n}$</p>
+<p>$\hat{\mathbf{d}}_{n+1}=\hat{\mathbf{r}}_{n+1}+\hat{\beta}_n\hat{\mathbf{d}}_n\Rightarrow E^{-T}E^{-1}\mathbf{d}_{n+1}=E^{-T}E^{-1}\mathbf{r}_n+\hat{\beta}_nE^{-T}E^{-1}\mathbf{d}_n$</p>
+</blockquote>
+<p>令$E^{-T}E^{-1}\mathbf{r_n}=M^{-1}\mathbf{r_n}=\mathbf{Z_n}$，$\mathbf{d’_n}=E^{-T}E^{-1}\mathbf{d_n}$，得到，</p>
+<blockquote>
+<p>$\mathbf{Z_n}=M^{-1}\mathbf{r_n}$</p>
+<p>$\hat{\alpha}_n=\frac{\mathbf{r}_n^T\mathbf{Z_n}}{\mathbf{d’}_n^TA\mathbf{d’}_n}$</p>
+<p>$\mathbf{x}_{n+1}=\mathbf{x}_n+\hat{\alpha}_n\mathbf{Z_{n+1}}$</p>
+<p>$\hat{\beta}_n=\frac{\mathbf{r}_{n+1}^T\mathbf{Z_{n+1}}}{\mathbf{r}_n^T\mathbf{Z_n}}$</p>
+<p>$\mathbf{d’_{n+1}}=\mathbf{Z_n}+\hat{\beta}_n\mathbf{d’_n}$</p>
+</blockquote>
+<p>常用的Preconditioner，</p>
+<p>Jacobi preconditioner：</p>
+<p>$A=F+D+F^T$，$M=D$</p>
+<p>Incomplete cholesky preconditioner[3]：</p>
+<p>$A=F+D+F^T$，$L=FE^{-1}+E$，$LL^T=(FE^{-1}+E)(E^{-1}F^T+E)=FE^{-1}E^{-1}F^T+F^T+F+EE$，为了确定$E$的数值，使$FE^{-1}E^{-1}F^T+F^T+F$的对角项等于$D$。注意$LL^T$并不是完全等于$A$的，有应该是0项的成了非0项。</p>
+<p>SSOR preconditioner：</p>
+<p>$A=F+D+F^T$，$M=(D+L)D^{-1}(D+L)^T$，</p>
+<p>带上参数之后，$M=\frac{1}{2-\omega}(\frac{1}{\omega}D+L)(\frac{1}{\omega}D)^{-1}(\frac{1}{\omega}D+L)^T$。</p>
+<p>Preconditioner的关键是需要$\mathbf{Z_n}=M^{-1}\mathbf{r_n}$这一步算起来很容易。上面的几个构建的都是可以直接求解（LDLT，LU，追赶法）的矩阵。</p>
+<p>从实践的结果看，加preconditioner的确要快。Incomplete cholesky preconditioner要快于SSOR  preconditioner。同一个问题，SSOR要132步收敛，ICP要52步收敛。</p>
+<h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h2><p>接下来进行MultiGrid以及FFT的学习，这两个都可以快速地求解线性方程组而且广泛的应用在很多地方，属于高级技巧，必须掌握。印象中，CUDA里有一个FFT解NS方程的example，可以参考一下。</p>
+<h2 id="6-参考资料"><a href="#6-参考资料" class="headerlink" title="6. 参考资料"></a>6. 参考资料</h2><p>[1] An Introduction to the Conjugate Gradient Method Without the Agonizing Pain</p>
+<p>[2] <a href="https://flat2010.github.io/2018/10/26/%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95%E9%80%9A%E4%BF%97%E8%AE%B2%E4%B9%89/" target="_blank" rel="noopener">资料[1]的中文翻译</a> </p>
+<p>[3] Fluid simulation for computer graphics</p>
+<p>[4] 数值计算方法与算法（第二版）</p>
+<p>[5] Templates for the Solution of Linear Systems: Building Blocks for Iterative Methods</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yiyixia.github.io/2020/06/23/Position-based-Dynamics/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -235,7 +350,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-27 11:02:36" itemprop="dateModified" datetime="2020-06-27T11:02:36+08:00">2020-06-27</time>
+                <time title="Modified: 2020-07-08 23:37:28" itemprop="dateModified" datetime="2020-07-08T23:37:28+08:00">2020-07-08</time>
               </span>
 
           
@@ -289,6 +404,11 @@
 <p>为了让模拟的时间变长，当质点撞到地面的时候，将落在地面上的粒子移到杯子中。连在尾部。这里就体现了链表的优势，操作非常简单。后来想了下，如果用数组做索引也可以。</p>
 <p>最终的模拟结果如图：</p>
 <p>可以看到，出现了珠链喷泉的现象。从一定程度上反应了，这个现象来源于杯底的作用力。</p>
+<ul>
+<li>单位向量的求导</li>
+</ul>
+<p>在隐式求解Mass-Spring时，需要对单位向量进行求导。求导的公式如下：</p>
+<p>$\frac {\partial {\hat x}}{\partial {x}}= \frac {I-{\hat x}{\hat x}^T}{\left |{x}\right |}$</p>
 <p>[1] <a href="https://en.wikipedia.org/wiki/Verlet_integration" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Verlet_integration</a></p>
 <p>[2] <a href="https://en.wikipedia.org/wiki/Leapfrog_integration" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Leapfrog_integration</a></p>
 <h2 id="7-Hexo图片、公式插入的问题"><a href="#7-Hexo图片、公式插入的问题" class="headerlink" title="7.Hexo图片、公式插入的问题"></a>7.Hexo图片、公式插入的问题</h2><p><strong>问题描述：如何在Hexo中插入图片、公式</strong></p>
@@ -308,6 +428,7 @@
 <li>插入公式</li>
 </ul>
 <p>直接参考<a href="https://runninggump.github.io/2018/12/05/%E6%88%90%E5%8A%9F%E8%A7%A3%E5%86%B3%E5%9C%A8hexo%E4%B8%AD%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E7%9A%84%E9%97%AE%E9%A2%98/" target="_blank" rel="noopener">教程</a>即可，很清楚。</p>
+<p><a href="https://www.youtube.com/watch?v=hdn6mqubh98&amp;list=PLgPpaTsP_3Dq5KsWd6-8wmjNs3ipnvCU3" target="_blank" rel="noopener">https://www.youtube.com/watch?v=hdn6mqubh98&amp;list=PLgPpaTsP_3Dq5KsWd6-8wmjNs3ipnvCU3</a></p>
 
       
     </div>
@@ -448,7 +569,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
